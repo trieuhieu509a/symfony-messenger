@@ -5,9 +5,24 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\HandleTrait;
+
+use App\Message\Query\SearchQuery;
 
 class EshopController extends AbstractController
 {
+    use HandleTrait;
+
+    /**
+     * @var MessageBusInterface
+     */
+    private $messageBus;
+
+    public function __construct(MessageBusInterface $messageBus)
+    {
+        $this->messageBus = $messageBus;
+    }
     /**
      * @Route("/", name="eshop")
      */
@@ -24,9 +39,9 @@ class EshopController extends AbstractController
     public function search()
     {
         $search = 'laptops';
-        // call database
-        sleep(1);
-        $result = ' result from database';
+
+        // $this->messageBus->dispatch(new SearchQuery($search));
+        $result = $this->handle(new SearchQuery($search));
 
         return new Response('Your search results for '.$search.$result);
     }
