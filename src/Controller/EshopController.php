@@ -10,6 +10,7 @@ use Symfony\Component\Messenger\HandleTrait;
 
 use App\Message\Query\SearchQuery;
 use App\Message\Command\CreateOrder;
+use App\Message\Command\SignUpSms;
 
 class EshopController extends AbstractController
 {
@@ -53,8 +54,7 @@ class EshopController extends AbstractController
     public function SignUpSMS()
     {
         $phoneNumber = '111 222 333 ';
-        // connect to api of external sms service provider
-        sleep(2);
+        $this->messageBus->dispatch(new SignUpSms($phoneNumber));
 
         return new Response(sprintf('Your phone number %s succesfully signed up to SMS newsletter!',$phoneNumber));
     }
