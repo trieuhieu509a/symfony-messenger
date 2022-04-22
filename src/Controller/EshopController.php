@@ -9,6 +9,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\HandleTrait;
 
 use App\Message\Query\SearchQuery;
+use App\Message\Command\CreateOrder;
 
 class EshopController extends AbstractController
 {
@@ -68,9 +69,7 @@ class EshopController extends AbstractController
         $productAmount = 2;
         // save the order in the database
 
-        // send an email to client confirming the order (product name, amount, price, etc.)
-        // update warehouse database to keep stock up to date in physical stores
-        sleep(4);
+        $this->messageBus->dispatch(new CreateOrder($productId, $productAmount));
 
         return new Response('You succesfully ordered your product!: '.$productName);
     }
