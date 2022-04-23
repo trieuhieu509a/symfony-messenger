@@ -3,3 +3,9 @@ composer require symfony/messenger
 bin/console debug:messenger
 
 bin/console messenger:consume -vv : command for comsume event
+
+install rabbitmq: https://www.rabbitmq.com/download.html
+    sudo apt install php-amqp (  sudo apt install php7.2-amqp )
+        add amqp.so to php load in needed
+    docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
+    go to : http://localhost:15672/
