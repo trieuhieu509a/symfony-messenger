@@ -1,3 +1,5 @@
 composer require symfony/messenger
 
 bin/console debug:messenger
+
+bin/console messenger:consume -vv : command for comsume event
