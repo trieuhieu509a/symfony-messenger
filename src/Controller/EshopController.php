@@ -64,13 +64,13 @@ class EshopController extends AbstractController
      */
     public function Order()
     {
-        $productId = 243;
+        $productId = mt_rand(0,100);
         $productName = 'product name';
         $productAmount = 2;
         // save the order in the database
 
         $this->messageBus->dispatch(new CreateOrder($productId, $productAmount));
 
-        return new Response('You succesfully ordered your product!: '.$productName);
+        return new Response('You succesfully ordered your product!: '.$productName . $productId);
     }
 }
