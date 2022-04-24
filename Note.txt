@@ -126,3 +126,9 @@ Next in the extra block of the composer.json file make sure you have:
 
 
 6. Run tests (if you have them) and see if there are some deprecation. Resolve them if necessary.
+
+========= ================= A series of posts showcasing the new features introduced by each Symfony version. ================================= ========================================================================
+
+https://symfony.com/blog/category/living-on-the-edge
+
+==========================  =============================  ===================================  =========================================
