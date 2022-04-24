@@ -14,3 +14,115 @@ install rabbitmq: https://www.rabbitmq.com/download.html
 
 cd ..
 composer create-project symfony/skeleton warehourse-system
+
+Upgrade Symfony from >=4.0 version
+
+Resources for upgrading info:
+
+patch upgrade https://symfony.com/doc/current/setup/upgrade_patch.html
+
+minor upgrade https://symfony.com/doc/current/setup/upgrade_minor.html
+
+major upgrade https://symfony.com/doc/current/setup/upgrade_major.html
+
+To quickly sum up the three resources above:
+
+
+
+A. Upgrade Symfony app to patch version, e.g. from 4.1.1 to 4.1.8
+
+run composer update command
+
+
+
+or
+
+
+
+B. Upgrade Symfony app to minor version, e.g. from 4.2 to 4.3 or to major version, e.g. from 4 to 5
+
+
+
+1. Update Symfony dependencies in composer.json file, for example if you want to upgrade from Symfony 4.1 to 4.3:
+
+{
+
+    "require": {
+
+...
+
+        "symfony/cache": "^4.0"
+
+...
+
+}
+
+
+
+Next in the extra block of the composer.json file make sure you have:
+
+"extra": {
+
+    "symfony": {
+
+        "allow-contrib": false,
+
+        "require": "4.3.*"
+
+    }
+
+}
+
+
+
+
+
+Another example, if you want to upgrade from Symfony 4.* to 5 stable,released! version:
+
+{
+
+    "require": {
+
+...
+
+        "symfony/cache": "^5.0"
+
+...
+
+}
+
+
+
+Next in the extra block of the composer.json file make sure you have:
+
+"extra": {
+
+    "symfony": {
+
+        "allow-contrib": false,
+
+        "require": "5.0.*"
+
+    }
+
+}
+
+
+
+2. Next run the following command:  composer update "symfony/*" --with-all-dependencies
+
+
+
+3. Next run:  composer update
+
+
+
+4. Read the UPGRADE file from https://github.com/symfony/symfony. For example if you want to upgrade from Symfony 4 to 5 read UPGRADE-5.0.md file. See if something needs to be changed in your application.
+
+
+
+5. Make your code deprecation free. To do so, open the profiler tool and click Logs section. See what is deprecated and if necessary resolve it.
+
+
+
+6. Run tests (if you have them) and see if there are some deprecation. Resolve them if necessary.
